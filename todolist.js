@@ -17,15 +17,19 @@ module.exports = class toDoList {
             else if (nbItem == 7) {
                 //mock envoie email
             }
-    
-            /* var pastItem = new Date(this.item[nbItem - 2].creationDate).getTime();
-    
+            
+            const pastItem = this.item[nbItem - 1]
+
+            var pastCreationDate = new Date(pastItem.creationDate).getTime();
+            
+            console.log(pastCreationDate)
+
             var thirtyMin = 1000 * 60 * 30;
     
-            if ((new Date().getTime() - pastItem) > thirtyMin){
+            if ((new Date().getTime() - pastCreationDate) > thirtyMin){
                 return true;
             }
-            throw new Error('wait 30 min between two items creation'); */
+            throw new Error('wait 30 min between two items creation');
 
         }
 
@@ -40,6 +44,8 @@ module.exports = class toDoList {
 
             this.item.push(newItem);
             
+            console.log(newItem)
+
             return true
         };
 
