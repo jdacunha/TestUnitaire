@@ -15,13 +15,10 @@ test('Name not string to throw an Error', () => {
     }).toThrow('Last name not valid') 
 });
 test('No name to throw an Error', () => {
-    const testUser= new user("jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")
+    const testUser= new user("", "jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")
     
     expect(() => {
         testUser.isValid()
     }).toThrow('Last name not valid') 
 });
 
-
-
-//ensuite faire tous les autres test etc..
