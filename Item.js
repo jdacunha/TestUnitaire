@@ -1,8 +1,8 @@
 module.exports = class Item {
-    constructor(nom, contenu) {
+    constructor(nom, contenu, creationDate) {
         this.name = nom,
         this.content = contenu,
-        this.creationDate = new Date()
+        this.creationDate = new Date(creationDate)
     }
 
     checkContent() {

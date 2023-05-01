@@ -1,4 +1,6 @@
 const Item = require("./Item");
+const Emailsend = require("./EmailSend");
+
 
 
 module.exports = class toDoList {
@@ -6,7 +8,7 @@ module.exports = class toDoList {
         this.item = []
     }
 
-    allowToCreate(nom) {
+    allowToCreate(nom, date) {
 
         const nbItem = this.item.length 
         if(nbItem != 0) {
@@ -24,11 +26,11 @@ module.exports = class toDoList {
 
             const pastItem = this.item[nbItem - 1]
 
-            var pastCreationDate = new Date(pastItem.creationDate).getTime();
+            var pastCreationDate = pastItem.creationDate.getTime();
 
             var thirtyMin = 1000 * 60 * 30;
     
-            if ((new Date().getTime() - pastCreationDate) > thirtyMin){
+            if ((date.getTime() - pastCreationDate) > thirtyMin){
                 return true;
             }
             throw new Error('wait 30 min between two items creation');
@@ -38,17 +40,19 @@ module.exports = class toDoList {
         return true
     }
 
-    addItem(nom, contenu) {
+    addItem(nom, contenu, date) {
 
-        if(this.allowToCreate(nom)) {
+        date = new Date(date)
 
-            const newItem = new Item(nom, contenu)
+        if(this.allowToCreate(nom, date)) {
+
+            const newItem = new Item(nom, contenu, date)
 
             if(newItem.checkContent()) {
                 this.item.push(newItem);
 
                 if (this.item.length == 8) {
-                    //mock envoie email
+                    Emailsend.sendEmail('email', 'objet', 'body');
                 }
 
                 return true
