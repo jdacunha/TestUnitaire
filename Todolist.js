@@ -14,9 +14,6 @@ module.exports = class toDoList {
             if(nbItem == 10 ) {
                 throw new Error('List is full')
             }
-            else if (nbItem == 7) {
-                //mock envoie email
-            }
             
             for (let i = 0; i < nbItem; i++) {
                 const element = this.item[i];
@@ -50,9 +47,15 @@ module.exports = class toDoList {
             if(newItem.checkContent()) {
                 this.item.push(newItem);
 
+                if (this.item.length == 8) {
+                    //mock envoie email
+                }
+
                 return true
             }
-            
+
+            throw new Error('Content not valid');
+
         };
 
         throw new Error('Cant create item');
