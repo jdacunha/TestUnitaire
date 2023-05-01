@@ -1,7 +1,4 @@
 const user = require("./User");
-const toDoList = require("./Todolist");
-
-const myMock = jest.fn();
 
 //----- Classic test -----
 test('User info classics to return true', () => {
@@ -105,3 +102,26 @@ test('User born in 2020 to throw an error', () => {
 });
 
 
+//----- Create ToDoList test -----
+test('Create a todolist with a valid user to return true', () => {
+    const testUser= new user("dc", "jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")    
+    
+    expect(() => {
+        testUser.createTodolist();
+    }).toBeTruthy() 
+});
+test('Todolist with a non-valid user to throw an error', () => {
+    const testUser= new user(12, "jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")    
+    
+    expect(() => {
+        testUser.createTodolist();
+    }).toThrow('Last name not valid')
+});
+test('Create a second todolist to throw an error', () => {
+    const testUser= new user("dc", "jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")    
+    testUser.createTodolist();
+    
+    expect(() => {
+        testUser.createTodolist();
+    }).toThrow('This user already have a todolist') 
+});

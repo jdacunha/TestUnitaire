@@ -6,7 +6,7 @@ module.exports = class toDoList {
         this.item = []
     }
 
-    allowToCreate() {
+    allowToCreate(nom) {
 
         const nbItem = this.item.length 
         if(nbItem != 0) {
@@ -18,11 +18,16 @@ module.exports = class toDoList {
                 //mock envoie email
             }
             
+            for (let i = 0; i < nbItem; i++) {
+                const element = this.item[i];
+                if (element.name == nom) {
+                    throw new Error('Name not unique')
+                }
+            }
+
             const pastItem = this.item[nbItem - 1]
 
             var pastCreationDate = new Date(pastItem.creationDate).getTime();
-            
-            console.log(pastCreationDate)
 
             var thirtyMin = 1000 * 60 * 30;
     
@@ -38,15 +43,16 @@ module.exports = class toDoList {
 
     addItem(nom, contenu) {
 
-        if(this.allowToCreate()) {
+        if(this.allowToCreate(nom)) {
 
             const newItem = new Item(nom, contenu)
 
-            this.item.push(newItem);
-            
-            console.log(newItem)
+            if(newItem.checkContent()) {
+                this.item.push(newItem);
 
-            return true
+                return true
+            }
+            
         };
 
         throw new Error('Cant create item');

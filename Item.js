@@ -2,8 +2,7 @@ module.exports = class Item {
     constructor(nom, contenu) {
         this.name = nom,
         this.content = contenu,
-        this.creationDate = new Date(),
-        this.checkContent()
+        this.creationDate = new Date()
     }
 
     checkContent() {
@@ -15,7 +14,7 @@ module.exports = class Item {
             }
         }
 
-        throw new Error('content is not valid')
+        throw new Error('Content is not valid')
     }
 
 }

@@ -85,12 +85,12 @@ module.exports = class user {
             const CreatedTodolist = new ToDoList();
 
             this.todolist = CreatedTodolist;
-        }
-        else {
-            throw new Error('Cant create todolist')
-        }
-    }
 
+            return true
+        }
+
+        throw new Error('Cant create todolist')
+    }
 
 }
 
