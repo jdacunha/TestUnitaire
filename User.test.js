@@ -1,4 +1,5 @@
-const user = require("./User2");
+const user = require("./User");
+const toDoList = require("./todolist");
 
 const myMock = jest.fn();
 
@@ -22,3 +23,13 @@ test('No name to throw an Error', () => {
     }).toThrow('Last name not valid') 
 });
 
+
+
+test('Test TODOLIST', () => {
+    const testUser= new user("dc", "jas", "oui@oui.fr", "Abcdefghi7", "02/04/2000")    
+    testUser.createTodolist();
+    testUser.todolist.addItem("blabla", "blublu")
+    testUser.todolist.addItem("floflo", "flyfly")
+
+    expect(testUser.todolist.item.length).toBe(2);
+});

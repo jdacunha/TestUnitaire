@@ -1,3 +1,6 @@
+const ToDoList = require("./todolist");
+const Item = require("./Item");
+
 var PasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 var EmailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
@@ -9,7 +12,8 @@ module.exports = class user {
         this.email = email,
         this.password = password,
         this.birthDate = birthDate,
-        this.externalApi = externalApi
+        this.externalApi = externalApi,
+        this.todolist = null
     }
 
     isValid () {
@@ -72,6 +76,22 @@ module.exports = class user {
         }
 
     }
+
+    createTodolist () {
+        if (this.todolist != null) {
+            throw new Error('This user already have a todolist')
+        }
+        if(this.isValid()) {
+            const CreatedTodolist = new ToDoList();
+
+            this.todolist = CreatedTodolist;
+        }
+        else {
+            throw new Error('Cant create todolist')
+        }
+    }
+
+
 }
 
 
